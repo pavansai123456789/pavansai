@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite; /* Animation for background */
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden; /* Prevent scrollbars from appearing */
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 3.5em; /* Increased font size for the heading */
+      margin-bottom: 20px;
+      animation: fadeInScale 1s ease-in-out; /* Fade-in and scale animation */
+      opacity: 0; /* Start invisible */
+      transform: translateY(-20px) scale(0.8); /* Start above and smaller */
+      animation-fill-mode: forwards; /* Keep the final state */
+      animation-delay: 0.5s; /* Delay for the heading */
+    }
+
+    @keyframes fadeInScale {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1); /* End at original size */
+      }
+    }
+
+    p {
+      font-size: 1.8em; /* Increased font size for the paragraph */
+      animation: fadeInScale 1s ease-in-out; /* Fade-in and scale animation */
+      animation-delay: 1s; /* Delay for the paragraph */
+      opacity: 0; /* Start invisible */
+      transform: translateY(-20px) scale(0.8); /* Start above and smaller */
+      animation-fill-mode: forwards; /* Keep the final state */
+    }
+
+    /* Confetti animation */
+    .confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* Allow clicks through confetti */
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ffcc00;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    /* Additional colors for confetti */
+    .confetti-piece:nth-child(1) { background-color: #ffcc00; left: 10%; animation-duration: 3s; }
+    .confetti-piece:nth-child(2) { background-color: #ff5733; left: 20%; animation-duration: 2.5s; }
+    .confetti-piece:nth-child(3) { background-color: #33ff57; left: 30%; animation-duration: 3.5s; }
+    .confetti-piece:nth-child(4) { background-color: #3357ff; left: 40%; animation-duration: 2.8s; }
+    .confetti-piece:nth-child(5) { background-color: #ff33a1; left: 50%; animation-duration: 3.2s; }
+    .confetti-piece:nth-child(6) { background-color: #ffcc00; left: 60%; animation-duration: 3.1s; }
+    .confetti-piece:nth-child(7) { background-color: #ff5733; left: 70%; animation-duration: 2.9s; }
+    .confetti-piece:nth-child(8) { background-color: #33ff57; left: 80%; animation-duration: 3.3s; }
+    .confetti-piece:nth-child(9) { background-color: #3357ff; left: 90%; animation-duration: 2.7s; }
+    .confetti-piece:nth-child(10) { background-color: #ff33a1; left: 50%; animation-duration: 3.4s; }
+
+    /* Particle effect */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      animation: particleAnimation 5s infinite;
+    }
+
+    @keyframes particleAnimation {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-100px) scale(1.5);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Thank You!</h1>
+    <p>Your response has been recorded.</p>
+  </div>
+
+  <div class="confetti">
+    <!-- Generate multiple confetti pieces -->
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+  </div>
+
+  <script>
+    // Create confetti pieces dynamically
+    const confettiContainer = document.querySelector('.confetti');
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti-piece');
+      confetti.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+      confetti.style.animationDuration = Math.random() * 3 + 2 + 's'; // Random fall duration
+      confettiContainer.appendChild(confetti);
+    }
+
+    // Create particle effects
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 10 + 5; // Random size between 5 and 15
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+      particle.style.top = Math.random() * 100 + 'vh'; // Random vertical position
+      particle.style.animationDuration = Math.random() * 5 + 3 + 's'; // Random animation duration
+      document.body.appendChild(particle);
+    }
+  </script>
+</body>
+</html>

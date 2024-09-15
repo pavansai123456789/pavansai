@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite; /* Animation for background */
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden; /* Prevent scrollbars from appearing */
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.1); /* Light translucent background */
+      backdrop-filter: blur(15px); /* Apply blur effect to the background */
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+      width: 400px;
+      text-align: center;
+      position: relative; /* For positioning the loader */
+      z-index: 1; /* Ensure the form is above the particle effects */
+      animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 2.5em; /* Adjusted font size */
+      color: #07c4f3; /* Solid color */
+      font-family: 'Verdana', sans-serif; /* Different font for heading */
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* Subtle shadow for better visibility */
+    }
+
+    .form-group {
+      margin-bottom: 20px; /* Increased margin for better spacing */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #c2c2c2;
+      text-align: left; /* Align labels to the left */
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 12px; /* Increased padding for better touch */
+      border: 1px solid #ccc;
+      border-radius: 10px; /* Rounded corners */
+      background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
+      color: #eee;
+      transition: border-color 0.3s, box-shadow 0.3s; /* Transition for glowing effect */
+      font-size: 16px; /* Increased font size */
+    }
+
+    input[type="text"]:focus, input[type="email"]:focus {
+      border-color: #15c0ef; /* Brighter border color */
+      box-shadow: 0 0 10px #15c0ef, 0 0 20px rgba(21, 192, 239, 0.7); /* Enhanced glowing effect on focus */
+      outline: none;
+    }
+
+    button[type="submit"] {
+      background-color: #0088ff;
+      color: white;
+      padding: 12px 0;
+      border: none;
+      border-radius: 10px; /* Rounded corners */
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s; /* Transition for hover effect */
+      width: 100%;
+      font-size: 16px; /* Increased font size */
+    }
+
+    button[type="submit"]:hover {
+      background-color: #15c0ef;
+      transform: translateY(-2px); /* Button lift effect */
+      box-shadow: 0 4px 10px rgba(0, 136, 255, 0.5); /* Shadow effect on hover */
+    }
+
+    /* Loading overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 3; /* Ensure overlay is above everything */
+    }
+
+    .loading-overlay.show {
+      display: flex; /* Show when needed */
+    }
+
+    /* Loader styles */
+    .loader {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid blue;
+      border-radius: 50%;
+      width: 50px; /* Increased size for visibility */
+      height: 50px; /* Increased size for visibility */
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Particle effect */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      animation: particleAnimation 5s infinite;
+    }
+
+    @keyframes particleAnimation {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-100px) scale(1.5);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Registration Form</h2>
+    <form id="registration-form" onsubmit="submitForm(event)">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="User" required pattern="[A-Za-z]+" title="Only alphabets are allowed.">
+      </div>
+      <div class="form-group">
+        <label for="class">Class:</label>
+        <input type="text" id="class" name="class" placeholder="User Class" required pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed.">
+      </div>
+      <div class="form-group">
+        <label for="id-number">ID Number:</label>
+        <input type="text" id="id-number" name="idNumber" placeholder="XXXX" required pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed.">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="user@gmail.com" required>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loader"></div> <!-- Loader in overlay -->
+  </div>
+
+  <script>
+    // Create particle effects
+    for (let i = 0; i < 50; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 10 + 5; // Random size between 5 and 15
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+      particle.style.top = Math.random() * 100 + 'vh'; // Random vertical position
+      particle.style.animationDuration = Math.random() * 5 + 3 + 's'; // Random animation duration
+      document.body.appendChild(particle);
+    }
+
+    function submitForm(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const formData = new FormData(document.getElementById('registration-form'));
+      const data = {};
+
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      // Show the loading overlay and blur the background
+      document.getElementById('loadingOverlay').classList.add('show');
+      document.body.style.filter = 'blur(5px)'; // Apply blur effect
+
+      fetch('https://script.google.com/macros/s/AKfycbxZEg6ZDwxpQzNhKLEEbrtuSQFbA-qvRvdQxtbAe-6gJGYxIc3oNwfSFwhVUPvp0nRuRw/exec', {
+        method: 'POST',
+        body: new URLSearchParams(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = 'thankyou.html'; // Redirect to thank you page
+        } else {
+          alert('There was an error submitting the form.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        // Hide the loading overlay and remove blur effect
+        document.getElementById('loadingOverlay').classList.remove('show');
+        document.body.style.filter = ''; // Remove blur effect
+      });
+    }
+  </script>
+</body>
+</html>
